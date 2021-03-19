@@ -1,0 +1,24 @@
+Croitoru Nicolae-Valentin, 334CC
+
+main:
+
+	Initially I am reading arguments of the program, then I initialize the barrier, create
+the threads, wait them and at the final I destroy the barrier.
+
+
+fun (my_thread function):
+
+	For Julia's part, initially we do on a single thread the reading from input file and
+the allocation of necessary memory then we use barrier_wait so the rest of threads will wait 
+the operations. The start and the end were calculated using classic formulas with 
+N = width:
+start = ID * (double)N / P;
+end = min((ID + 1) * (double)N / P, N);
+	The parallelisation is made for the outer loop and I am doing barrier_wait at the final 
+of the loop.
+	Next loop, where I am doing the transformation of the result, needs to be parallelised, 
+start and end are calculated by N = height/2. At the final of the loop I am adding a 
+barrier_wait.
+	The writing of output file and memory freeing are made on a single thread and at the 
+final I am waiting the rest of the threads.
+	The Mandelbrot's part is built similarly as Julia's part.
